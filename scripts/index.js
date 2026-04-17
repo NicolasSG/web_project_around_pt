@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   ["Vale de Yosemite", "https://code.s3.yandex.net/web-code/yosemite.jpg"],
   ["Lago Louise", "https://code.s3.yandex.net/web-code/lake-louise.jpg"],
   [
@@ -35,8 +35,10 @@ createCardButton.addEventListener("click", (evt) => {
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
 
-  let nameInput = document.querySelector(".popup__input_type_card-name").value;
-  let urlInput = document.querySelector(".popup__input_type_url").value;
+  const nameInput = document.querySelector(
+    ".popup__input_type_card-name",
+  ).value;
+  const urlInput = document.querySelector(".popup__input_type_url").value;
 
   renderNewCard(nameInput, urlInput, containerCard);
 
@@ -153,12 +155,14 @@ function handleOpenEditModal() {
   fillProfileForm();
 }
 
-let formElement = document.querySelector(".popup__form");
+const formElement = document.querySelector(".popup__form");
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  let nameInput = document.querySelector(".popup__input_type_name").value;
-  let jobInput = document.querySelector(".popup__input_type_description").value;
+  const nameInput = document.querySelector(".popup__input_type_name").value;
+  const jobInput = document.querySelector(
+    ".popup__input_type_description",
+  ).value;
 
   document.querySelector(".profile__title").textContent = nameInput;
   document.querySelector(".profile__description").textContent = jobInput;
