@@ -21,12 +21,87 @@ const closeButtonNewProfile = document.querySelector(
 const profileAddButton = document.querySelector(".profile__add-button");
 const editModal = document.querySelector("#edit-popup");
 const newProfile = document.querySelector("#new-card-popup");
+const inputsNewProf = newProfile.querySelectorAll(".popup__input");
 const containerCard = document.querySelector(".cards__list");
 const createCardButton = document.querySelector(
   "#new-card-form > .popup__button",
 );
 const imageModal = document.querySelector("#image-popup");
 const imageModalCloseBtn = imageModal.querySelector(".popup__close");
+
+const form = editModal;
+const inputs = editModal.querySelectorAll(".popup__input");
+const salvarButton = form.querySelector(".popup__button");
+
+inputsNewProf.forEach((input) => {
+  input.addEventListener("input", () => {
+    if (!input.validity.valid) {
+      showInputError(input, input.validationMessage, newProfile);
+    } else {
+      hideInputError(input, newProfile);
+    }
+  });
+});
+
+newProfile.addEventListener("submit", (event) => {
+  let formValid = true;
+
+  inputsNewProf.forEach((input) => {
+    if (!input.validity.valid) {
+      showInputError(input, input.validationMessage, newProfile);
+      formValid = false;
+    }
+  });
+
+  if (!formValid) {
+    event.preventDefault();
+  }
+});
+
+function showInputError(inputElement, errorMessage, form) {
+  const errorElement = form.querySelector(`.${inputElement.id}-input-error`);
+  const button = form.querySelector(".popup__button");
+  inputElement.classList.add("form__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error_active");
+  button.removeAttribute("enabled");
+  button.setAttribute("disabled", "");
+}
+
+function hideInputError(inputElement, form) {
+  const errorElement = form.querySelector(`.${inputElement.id}-input-error`);
+  const button = form.querySelector(".popup__button");
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.textContent = "";
+  errorElement.classList.remove("form__input-error_active");
+  button.removeAttribute("disabled");
+  button.setAttribute("enabled", "");
+}
+
+inputs.forEach((input) => {
+  input.addEventListener("input", () => {
+    if (!input.validity.valid) {
+      showInputError(input, input.validationMessage, form);
+    } else {
+      hideInputError(input, form);
+    }
+  });
+});
+
+form.addEventListener("submit", (event) => {
+  let formValid = true;
+
+  inputs.forEach((input) => {
+    if (!input.validity.valid) {
+      showInputError(input, input.validationMessage, form);
+      formValid = false;
+    }
+  });
+
+  if (!formValid) {
+    event.preventDefault();
+  }
+});
 
 createCardButton.addEventListener("click", (evt) => {
   handleCardFormSubmit(evt);
@@ -35,10 +110,8 @@ createCardButton.addEventListener("click", (evt) => {
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
 
-  const nameInput = document.querySelector(
-    ".popup__input_type_card-name",
-  ).value;
-  const urlInput = document.querySelector(".popup__input_type_url").value;
+  let nameInput = document.querySelector(".popup__input_type_card-name").value;
+  let urlInput = document.querySelector(".popup__input_type_url").value;
 
   renderNewCard(nameInput, urlInput, containerCard);
 
@@ -46,6 +119,13 @@ function handleCardFormSubmit(evt) {
 }
 
 profileAddButton.addEventListener("click", () => {
+  let elements = newProfile.querySelectorAll(".popup__input");
+  elements.forEach((el) => {
+    el.value = "";
+  });
+  const button = newProfile.querySelector(".popup__button");
+  button.toggleAttribute("enabled");
+  button.toggleAttribute("disabled");
   openModal(newProfile);
 });
 
@@ -133,6 +213,30 @@ function openModal(element) {
 function closeModal(element) {
   element.classList.remove("popup_is-opened");
 }
+
+function addOverlayCloseHandler(popup) {
+  popup.addEventListener("click", (event) => {
+    if (event.target === popup) {
+      closeModal(popup);
+    }
+  });
+}
+
+addOverlayCloseHandler(editModal);
+addOverlayCloseHandler(newProfile);
+addOverlayCloseHandler(imageModal);
+
+function closeEscBtn(popup) {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeModal(popup);
+    }
+  });
+}
+
+closeEscBtn(editModal);
+closeEscBtn(newProfile);
+closeEscBtn(imageModal);
 
 editButton.addEventListener("click", () => {
   handleOpenEditModal();

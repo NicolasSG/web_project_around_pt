@@ -67,20 +67,33 @@
             type="button"
           ></button>
           <h3 class="popup__title">Editar perfil</h3>
-          <form class="popup__form" id="edit-profile-form">
+          <form class="popup__form" id="edit-profile-form" novalidate>
             <input
+              id="nome"
               class="popup__input popup__input_type_name"
               name="name"
               placeholder="Nome"
               type="text"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="nome-input-error form__input-error"></span>
+
             <input
+              id="descricao"
               class="popup__input popup__input_type_description"
               name="description"
               placeholder="Sobre mim"
               type="text"
+              minlength="2"
+              maxlength="200"
+              required
             />
-            <button class="button popup__button" type="submit">Salvar</button>
+            <span class="descricao-input-error form__input-error"></span>
+            <button class="button popup__button" type="submit" enabled>
+              Salvar
+            </button>
           </form>
         </div>
       </div>
@@ -94,19 +107,25 @@
           <h3 class="popup__title">Novo local</h3>
           <form class="popup__form" id="new-card-form">
             <input
+              id="titulo"
               class="popup__input popup__input_type_card-name"
               name="place-name"
               placeholder="Título"
               required
               type="text"
+              minlength="2"
+              maxlength="30"
             />
+            <span class="titulo-input-error form__input-error"></span>
             <input
+              id="url"
               class="popup__input popup__input_type_url"
               name="link"
               placeholder="Link de Imagem"
               required
               type="url"
             />
+            <span class="url-input-error form__input-error"></span>
             <button class="button popup__button" type="submit">Criar</button>
           </form>
         </div>
