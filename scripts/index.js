@@ -61,9 +61,9 @@ newProfile.addEventListener("submit", (event) => {
 function showInputError(inputElement, errorMessage, form) {
   const errorElement = form.querySelector(`.${inputElement.id}-input-error`);
   const button = form.querySelector(".popup__button");
-  inputElement.classList.add("form__input_type_error");
+  inputElement.classList.add("popup__input_type_error");
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__form__input-error_active");
+  errorElement.classList.add("popup__input-error_active");
   button.removeAttribute("enabled");
   button.setAttribute("disabled", "");
 }
@@ -71,9 +71,9 @@ function showInputError(inputElement, errorMessage, form) {
 function hideInputError(inputElement, form) {
   const errorElement = form.querySelector(`.${inputElement.id}-input-error`);
   const button = form.querySelector(".popup__button");
-  inputElement.classList.remove("form__input_type_error");
+  inputElement.classList.remove("popup__input_type_error");
   errorElement.textContent = "";
-  errorElement.classList.remove("popup__form__input-error_active");
+  errorElement.classList.remove("popup__input-error_active");
   button.removeAttribute("disabled");
   button.setAttribute("enabled", "");
 }
