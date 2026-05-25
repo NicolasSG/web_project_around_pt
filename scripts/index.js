@@ -130,7 +130,6 @@ function renderCard(name, link, containerCard, method) {
 function openModal(element) {
   element.classList.add("popup_is-opened");
   enableEscBtn(element);
-  fillProfileForm();
 }
 
 function closeModal(element) {
@@ -187,12 +186,16 @@ closeButton.addEventListener("click", () => {
   closeModal(editModal);
 });
 
-const titleName = document.querySelector(".profile__title").textContent;
-const description = document.querySelector(".profile__description").textContent;
-
 function fillProfileForm() {
+  const titleName = document.querySelector(".profile__title").textContent;
+  const description = document.querySelector(
+    ".profile__description",
+  ).textContent;
   document.querySelector(".popup__input_type_name").value = titleName;
   document.querySelector(".popup__input_type_description").value = description;
+  console.log(
+    (document.querySelector(".popup__input_type_name").value = titleName),
+  );
 }
 
 function handleOpenEditModal() {
