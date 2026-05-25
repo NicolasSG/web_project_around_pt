@@ -38,7 +38,9 @@ createCardButton.addEventListener("click", (evt) => {
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
 
-  const nameInput = document.querySelector(".popup__input_type_card-name").value;
+  const nameInput = document.querySelector(
+    ".popup__input_type_card-name",
+  ).value;
   const urlInput = document.querySelector(".popup__input_type_url").value;
 
   renderCard(nameInput, urlInput, containerCard, "prepend");
@@ -95,7 +97,7 @@ function getCardElement(name, link) {
   });
 
   image.addEventListener("click", () => {
-    imageModal.classList.toggle("popup_is-opened");
+    openModal(imageModal);
     imageModal.querySelector(".popup__image").setAttribute("src", image.src);
     imageModal
       .querySelector(".popup__image")
@@ -104,7 +106,7 @@ function getCardElement(name, link) {
   });
 
   imageModalCloseBtn.addEventListener("click", () => {
-    imageModal.classList.remove("popup_is-opened");
+    closeModal(imageModal);
   });
 
   return cardTemplate;
