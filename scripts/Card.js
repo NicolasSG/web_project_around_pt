@@ -55,4 +55,4 @@ class Card {
   }
 }
 
-export { Card };
+export default Card;
