@@ -32,7 +32,7 @@ class Card {
 
     this._element
       .querySelector(".card__delete-button")
-      .addEventListener("click", () => this._handleDeleteClick());
+      .addEventListener("click", (evt) => this._handleDeleteClick(evt));
 
     this._element
       .querySelector(".card__image")
